@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Incluir Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Ventana del chatbot -->
+    <div id="chat-window">
+      <!-- Encabezado del chat -->
+      <div id="chat-header" onclick="toggleMinimize()">
+        <div id="chat-title-container">
+          <span id="chat-title"></span>
+        </div>
+        <!-- Botones para minimizar y cerrar la ventana -->
+        <div id="chat-header-buttons">
+          <button onclick="toggleMinimize()">
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <button onclick="closeChat()"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <!-- Mensajes del chat -->
+      <div id="chat-messages"></div>
+      <!-- Entrada de texto del chat -->
+      <div id="chat-input">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Enter your question..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Obtiene parámetros de la URL
+      const params = new URLSearchParams(window.location.search);
+      const color = params.get("color") || "#007bff";
+      const title = params.get("title") || "Asistente de Lazzar Solutions";
+      const font = params.get("font") || "Arial";
+
+      // Asigna los valores obtenidos a los elementos HTML
+      document.getElementById("chat-title").innerText = title;
+      document.getElementById("chat-header").style.backgroundColor = color;
+      document.body.style.fontFamily = font;
+
+      // Función para cerrar el chat
+      function closeChat() {
+        window.parent.document.getElementById("chat-iframe").style.display =
+          "none";
+        window.parent.document.getElementById("chat-button").style.display =
+          "block";
+      }
+
+      // Función para minimizar y maximizar la ventana del chat
+      function toggleMinimize() {
+        const chatWindow = document.getElementById("chat-window");
+        chatWindow.classList.toggle("minimized");
+      }
+
+      // Función para enviar el mensaje
+      async function sendMessage() {
+        const userInput = document.getElementById("userInput").value;
+        if (!userInput.trim()) return;
+
+        const messages = document.getElementById("chat-messages");
+        // Crear mensaje del usuario
+        const userMessage = document.createElement("div");
+        userMessage.classList.add("user-message");
+        userMessage.innerHTML = `<span>${userInput}</span>`;
+        messages.appendChild(userMessage);
+
+        // Enviar mensaje al servidor y obtener la respuesta
+        const response = await fetch("/api/message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: userInput }),
+        });
+
+        const data = await response.json();
+        // Crear mensaje de la IA
+        const aiMessage = document.createElement("div");
+        aiMessage.classList.add("ai-message");
+        aiMessage.innerHTML = `<span>${data.response}</span>`;
+        messages.appendChild(aiMessage);
+
+        // Limpiar la entrada de texto y hacer scroll hasta el final
+        document.getElementById("userInput").value = "";
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      // Función para manejar el evento de tecla
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+    </script>
+  </body>
+</html>

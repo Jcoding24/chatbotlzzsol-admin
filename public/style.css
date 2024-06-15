@@ -1,0 +1,155 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Botón de chat */
+#chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Iframe del chat */
+#chat-iframe {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+/* Ventana del chat */
+#chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+/* Ventana minimizada */
+#chat-window.minimized {
+  height: 40px;
+}
+
+/* Encabezado del chat */
+#chat-header {
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Título del chat */
+#chat-title-container {
+  flex: 1;
+}
+
+#chat-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Botones del encabezado del chat */
+#chat-header-buttons {
+  display: flex;
+  align-items: center;
+}
+
+#chat-header-buttons button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#chat-header-buttons .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Área de mensajes del chat */
+#chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mensaje del usuario */
+.user-message {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.user-message span {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  text-align: right;
+}
+
+/* Mensaje de la IA */
+.ai-message {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.ai-message span {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  text-align: left;
+}
+
+/* Entrada de texto del chat */
+#chat-input {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+#chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+}
+
+#chat-input button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#chat-input button i {
+  width: 20px;
+  height: 20px;
+}

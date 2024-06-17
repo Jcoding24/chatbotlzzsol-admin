@@ -2,9 +2,9 @@
   "name": "my-generative-ai-app",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server-admin.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server-admin.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.12.0",

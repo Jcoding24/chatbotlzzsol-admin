@@ -47,10 +47,7 @@ async function initializeChatSession() {
         role: "model",
         parts: [
           {
-            text: "¡Entendido! Soy el asistente virtual de igari motors. 
-
-Estoy aquí para ayudarlos en lo que necesiten. 😊 
-",
+            text: "¡Entendido! Soy el asistente virtual de igari motors. Estoy aquí para ayudarlos en lo que necesiten. 😊 ",
           },
         ],
       },
